@@ -32,7 +32,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
-import android.os.SystemVibrator;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -95,9 +94,7 @@ public class Ringer {
         mContext = context;
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mPowerManager = IPowerManager.Stub.asInterface(ServiceManager.getService(Context.POWER_SERVICE));
-        // We don't rely on getSystemService(Context.VIBRATOR_SERVICE) to make sure this
-        // vibrator object will be isolated from others.
-        mVibrator = new SystemVibrator();
+        mVibrator = (Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     /**
